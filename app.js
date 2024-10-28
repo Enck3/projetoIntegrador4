@@ -31,11 +31,11 @@ app.get('/', (req, res) => {
 
 app.post('/user/register', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { name, email, password, telefone, endereco } = req.body;
 
         // Verificar se os campos foram fornecidos
-        if (!username || !email || !password) {
-            return res.status(400).json({ message: 'Por favor, forneça username, email e password' });
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'Por favor, forneça nome, email e password' });
         }
 
         // Acessar a coleção de usuários
@@ -43,7 +43,7 @@ app.post('/user/register', async (req, res) => {
         const usersCollection = db.collection('users');
 
         // Verificar se o usuário ou e-mail já existe
-        const existingUser = await usersCollection.findOne({ $or: [{ username }, { email }] });
+        const existingUser = await usersCollection.findOne({ $or: [{ name }, { email }, { telefone }, { endereco }] });
         if (existingUser) {
             return res.status(400).json({ message: 'Nome de usuário ou e-mail já está em uso' });
         }
@@ -53,9 +53,11 @@ app.post('/user/register', async (req, res) => {
 
         // Criar o objeto do novo usuário
         const newUser = {
-            username,
+            name,
             email,
             password: hashedPassword,
+            telefone,
+            endereco, 
             createdAt: new Date()
         };
 
