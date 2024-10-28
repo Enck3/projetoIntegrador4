@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
-app.post('/register', async (req, res) => {
+app.post('/user/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
