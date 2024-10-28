@@ -27,7 +27,7 @@ const connectDB = async () => {
 
 
 connectDB();
-
+//teste
 // Rota básica
 app.get('/', (req, res) => {
     res.send('Hello, world!');
