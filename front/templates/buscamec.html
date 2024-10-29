@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Mecânicos</title>
+    <link rel="stylesheet" href="../style/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Encontre um Mecânico</h1>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <h2>Busca de Mecânicos</h2>
+            <div class="filter-section">
+                <select id="specialtyFilter">
+                    <option value="">Escolher Especialidade</option>
+                    <option value="motor">Motor</option>
+                    <option value="freios">Freios</option>
+                    <option value="suspensao">Suspensão</option>
+                </select>
+                <button onclick="searchMechanics()">Buscar</button>
+            </div>
+
+            <div id="results" class="results-container"></div>
+            
+            <button onclick="history.back()" class="back-button">Voltar</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mecânicos Online. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="../scripts/scripts.js"></script>
+</body>
+</html>

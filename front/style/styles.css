@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+
+header {
+    background-color: #1c3a56;
+    color: #fff;
+    padding: 1.5em;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 1em;
+}
+
+header nav ul li a {
+    color: #ffa726;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #ffd54f; 
+}
+
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2em;
+    text-align: center;
+}
+
+.intro h2 {
+    font-size: 2em;
+    color: #1c3a56;
+    margin-bottom: 0.5em;
+}
+
+.intro p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+
+.feature {
+    width: 30%;
+    padding: 1.5em;
+    margin: 1em 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature h3 {
+    font-size: 1.5em;
+    color: #1c3a56;
+    margin-bottom: 0.5em;
+}
+
+.feature p {
+    font-size: 1em;
+    color: #666;
+}
+
+
+.login-container, .signup-container, .profile-container, .search-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 2em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+button {
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus {
+    outline: none;
+    border-color: #ffa726;
+    box-shadow: 0px 0px 5px rgba(255, 167, 38, 0.5);
+}
+
+button {
+    background-color: #1c3a56;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffa726;
+}
+
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #1c3a56;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        width: 80%;
+    }
+
+    header nav ul li {
+        display: block;
+        margin: 0.5em 0;
+    }
+}
+
+
+.search-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.search-container h2 {
+    font-size: 1.8em;
+    color: #1c3a56;
+    margin-bottom: 1em;
+}
+
+.filter-section {
+    display: flex;
+    gap: 0.5em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5em;
+}
+
+.filter-section input[type="text"],
+.filter-section select,
+.filter-section button {
+    padding: 0.8em;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+}
+
+.filter-section input[type="text"]:focus,
+.filter-section select:focus {
+    border-color: #ffa726;
+    box-shadow: 0px 0px 5px rgba(255, 167, 38, 0.5);
+}
+
+.filter-section button {
+    background-color: #1c3a56;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+.filter-section button:hover {
+    background-color: #ffa726;
+}
+
+
+.results-container {
+    margin-top: 1.5em;
+}
+
+.result-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+}
+
+.result-item h3 {
+    color: #1c3a56;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+
+.result-item p {
+    font-size: 1em;
+    color: #666;
+    margin: 0.5em 0;
+}
+
+.result-item .specialty,
+.result-item .location {
+    font-weight: bold;
+    color: #ffa726;
+}
+
+.no-results {
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    margin-top: 2em;
+}
