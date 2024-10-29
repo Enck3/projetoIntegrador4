@@ -1,13 +1,15 @@
-import { MongoClient } from 'mongodb';
+
 
 const express = require('express');
+ 
+const bcrypt = require('bcrypt');
+
 const app = express();
 const PORT = 3000;
-const bcrypt = require('bcrypt')
 
 
 
-const { MongoClient } = require('mongodb');
+
 
 
 const uri = 'mongodb+srv://lucaspcanhete:123456qwerty@cluster0.qvz9g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
@@ -53,7 +55,7 @@ app.post('/user/register', async (req, res) => {
         }
 
         // Criptografar a senha antes de armazená-la
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await hash(password, 10);
 
         // Criar o objeto do novo usuário
         const newUser = {
@@ -96,7 +98,7 @@ app.post('/user/login', async (req, res) => {
         }
 
         // Criptografar a senha antes de armazená-la
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await compare(password, user.password);
         if(!isPasswordValid) {
             return res.status(400).json({ message: 'Senha incorreta.' });
         }
@@ -131,16 +133,16 @@ app.post('/mecanico/login', async (req, res) => {
 
         // Acessar a coleção de usuários
         const db = client.db('projetoIntegrador'); // Substitua pelo nome do seu banco
-        const usersCollection = db.collection('mecanicos');
+        const mecanicosCollection = db.collection('mecanicos');
 
         // Verificar se o usuário ou e-mail já existe
-        const user = await usersCollection.findOne( { email: email } );
+        const user = await mecanicosCollection.findOne( { email: email } );
         if (!user) {
             return res.status(400).json({ message: 'Usuário não existente' });
         }
 
         // Criptografar a senha antes de armazená-la
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await compare(password, user.password);
         if(!isPasswordValid) {
             return res.status(400).json({ message: 'Senha incorreta.' });
         }
