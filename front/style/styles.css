@@ -1,11 +1,10 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Layout Geral */
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -13,9 +12,9 @@ body {
     color: #333;
 }
 
-/* Cabeçalho */
+
 header {
-    background-color: #1c3a56; /* Azul escuro */
+    background-color: #1c3a56;
     color: #fff;
     padding: 1.5em;
     text-align: center;
@@ -37,16 +36,16 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: #ffa726; /* Laranja */
+    color: #ffa726;
     text-decoration: none;
     font-weight: bold;
 }
 
 header nav ul li a:hover {
-    color: #ffd54f; /* Laranja mais claro */
+    color: #ffd54f; 
 }
 
-/* Conteúdo Principal */
+
 main {
     max-width: 1200px;
     margin: auto;
@@ -98,7 +97,7 @@ main {
     color: #666;
 }
 
-/* Formulários */
+
 .login-container, .signup-container, .profile-container, .search-container {
     max-width: 500px;
     margin: auto;
@@ -144,7 +143,7 @@ button:hover {
     background-color: #ffa726;
 }
 
-/* Rodapé */
+
 footer {
     text-align: center;
     padding: 1em;
@@ -156,7 +155,7 @@ footer {
     font-size: 0.9em;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
     .features {
         flex-direction: column;
@@ -173,7 +172,7 @@ footer {
     }
 }
 
-/* Estilos para a seção de busca e filtros */
+
 .search-container {
     max-width: 800px;
     margin: auto;
@@ -228,7 +227,7 @@ footer {
     background-color: #ffa726;
 }
 
-/* Estilos para os resultados */
+
 .results-container {
     margin-top: 1.5em;
 }
