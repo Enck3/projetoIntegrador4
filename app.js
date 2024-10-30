@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 app.post('/user/register', async (req, res) => {
     try {
-        const { name, email, password, telefone, endereco } = req.body;
+        const { name, email, password, telefone, cidade } = req.body;
 
         // Verificar se os campos foram fornecidos
         if (!name || !email || !password) {
@@ -47,7 +47,7 @@ app.post('/user/register', async (req, res) => {
         const usersCollection = db.collection('users');
 
         // Verificar se o usuário ou e-mail já existe
-        const existingUser = await usersCollection.findOne({ $or: [{ name }, { email }, { telefone }, { endereco }] });
+        const existingUser = await usersCollection.findOne({ $or: [{ name }, { email }, { telefone }, { cidade }] });
         if (existingUser) {
             return res.status(400).json({ message: 'Nome de usuário ou e-mail já está em uso' });
         }
@@ -61,7 +61,7 @@ app.post('/user/register', async (req, res) => {
             email,
             password: hashedPassword,
             telefone,
-            endereco, 
+            cidade, 
             createdAt: new Date()
         };
 
@@ -117,7 +117,7 @@ app.post('/user/login', async (req, res) => {
 });
 
 
-app.post('/register-mechanic', async (req, res) => {
+app.post('/mecanico/register', async (req, res) => {
     try {
         const {
             nome,
@@ -290,6 +290,35 @@ app.put('/mecanico/editar/:id', async (req, res) => {
     }
 });
 
+app.get('/buscar-por-cidade', async (req, res) => {
+    const { cidade } = req.query;
+
+    // Verifica se o parâmetro de cidade foi passado
+    if (!cidade) {
+        return res.status(400).json({ error: 'A cidade é obrigatória para a busca.' });
+    }
+
+    try {
+        await client.connect();
+        const database = client.db('SEU_NOME_DB');
+        const mecanicosCollection = database.collection('mecanicos');
+
+        // Filtra os mecânicos pela cidade fornecida
+        const mecanicos = await mecanicosCollection.find({ localizacao: cidade }).toArray();
+
+        // Retorna uma mensagem caso não haja mecânicos na cidade
+        if (mecanicos.length === 0) {
+            return res.status(404).json({ message: 'Nenhum mecânico encontrado nessa cidade.' });
+        }
+
+        res.json(mecanicos);
+    } catch (error) {
+        console.error('Erro ao buscar mecânicos:', error);
+        res.status(500).json({ error: 'Erro no servidor ao buscar mecânicos.' });
+    } finally {
+        await client.close();
+    }
+});
 
 
 
