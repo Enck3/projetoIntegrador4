@@ -270,3 +270,108 @@ footer {
     text-align: center;
     margin-top: 2em;
 }
+
+/* CSS para a página de Cadastro de Agendamento */
+
+.appointment-container {
+    /* Estilização do container principal para o formulário de cadastro */
+    max-width: 600px;
+    margin: auto;
+    padding: 2em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.appointment-container h2 {
+    /* Título da página de cadastro */
+    font-size: 1.8em;
+    color: #1c3a56;
+    margin-bottom: 1em;
+}
+
+.appointment-container form input[type="text"],
+.appointment-container form input[type="date"],
+.appointment-container form select {
+    /* Estilo para os campos de entrada no formulário de cadastro */
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.appointment-container form input[type="text"]:focus,
+.appointment-container form input[type="date"]:focus,
+.appointment-container form select:focus {
+    /* Estilo para os campos quando estão focados */
+    outline: none;
+    border-color: #ffa726;
+    box-shadow: 0px 0px 5px rgba(255, 167, 38, 0.5);
+}
+
+.appointment-container form button {
+    /* Estilo para o botão de envio do formulário de cadastro */
+    background-color: #1c3a56;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    padding: 0.8em;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.appointment-container form button:hover {
+    /* Efeito ao passar o mouse sobre o botão de envio */
+    background-color: #ffa726;
+}
+
+/* CSS para a página de Listagem de Agendamentos */
+
+.list-container {
+    /* Estilização do container principal para a listagem de agendamentos */
+    max-width: 600px;
+    margin: auto;
+    padding: 2em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.list-container h2 {
+    /* Título da página de listagem */
+    font-size: 1.8em;
+    color: #1c3a56;
+    margin-bottom: 1em;
+}
+
+.appointment-item {
+    /* Estilização para cada item de agendamento na lista */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-item h3 {
+    /* Estilo para o nome do cliente nos itens de agendamento */
+    color: #1c3a56;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+
+.appointment-item p {
+    /* Estilo para as informações adicionais em cada item */
+    font-size: 1em;
+    color: #666;
+    margin: 0.5em 0;
+}
