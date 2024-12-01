@@ -3,14 +3,18 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
+const net = require('net');
 
 
 
 const { MongoClient } = require('mongodb');
 
+app.use(express.json());
 
-const uri = 'mongodb+srv://lucaspcanhete:123456qwerty@cluster0.qvz9g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
+const uri = 'mongodb+srv://lucaspcanhete:123456qwerty@cluster0.ypscm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connectDB = async () => {
@@ -43,32 +47,56 @@ app.post('/user/register', async (req, res) => {
         }
 
         // Acessar a coleção de usuários
-        const db = client.db('projetoIntegrador'); // Substitua pelo nome do seu banco
+        const db = client.db('projetoIntegrador4');
         const usersCollection = db.collection('users');
 
         // Verificar se o usuário ou e-mail já existe
-        const existingUser = await usersCollection.findOne({ $or: [ { email } ] });
+        const existingUser = await usersCollection.findOne({ $or: [{ email }] });
         if (existingUser) {
             return res.status(400).json({ message: 'Nome de usuário ou e-mail já está em uso' });
         }
 
-        // Criptografar a senha antes de armazená-la
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // Criar conexão com o servidor Java
+        const clientJava = new net.Socket();
 
-        // Criar o objeto do novo usuário
-        const newUser = {
-            name,
-            email,
-            password: hashedPassword,
-            telefone,
-            cidade, 
-            createdAt: new Date()
-        };
+        clientJava.connect(8080, 'localhost', () => {
+            console.log('Conectado ao servidor Java');
+            clientJava.write(`${password}\n`); // Enviar senha ao servidor
+        });
 
-        // Inserir o novo usuário na coleção
-        const result = await usersCollection.insertOne(newUser);
+        clientJava.on('data', async (data) => {
+            try {
+                const isValid = data.toString().trim(); // Remover espaços ou quebras de linha
+                console.log('Resposta do servidor Java:', isValid);
 
-        res.status(201).json({ message: 'Usuário cadastrado com sucesso!', userId: result.insertedId });
+                if (isValid === "True") {
+                    // Hash da senha e inserção no banco
+                    const hashedPassword = await bcrypt.hash(password, 10);
+                    const newUser = {
+                        name,
+                        email,
+                        password: hashedPassword,
+                        telefone,
+                        cidade,
+                        createdAt: new Date(),
+                    };
+                    const result = await usersCollection.insertOne(newUser);
+                    res.status(201).json({ message: 'Usuário cadastrado com sucesso!', userId: result.insertedId });
+                } else {
+                    res.status(400).json({ message: 'Senha inválida' });
+                }
+            } catch (error) {
+                console.error('Erro ao processar resposta do Java:', error);
+                res.status(500).json({ message: 'Erro ao validar senha' });
+            } finally {
+                clientJava.destroy(); // Garantir encerramento da conexão
+            }
+        });
+
+        clientJava.on('error', (error) => {
+            console.error('Erro na conexão com o servidor Java:', error);
+            res.status(500).json({ message: 'Erro na comunicação com o servidor Java' });
+        });
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
         res.status(500).json({ message: 'Erro ao cadastrar usuário' });

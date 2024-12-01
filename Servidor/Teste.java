@@ -29,11 +29,16 @@ public class Teste {
                     System.out.println("Senha: " + password);
 
                     Senha p = new Senha(password);
-                    if (p.isSenhaValida())
+                    if (p.isSenhaValida()){
+                        System.out.println("Senha valida");
                         writer.println("True");
-                    else
+                    }
+                    else{
+                        System.out.println("Senha invalida");
                         writer.println("False");
-
+                    }
+                    
+                    writer.flush();
                 } catch (Exception e) {
                     System.err.println("Gerador exception: " + e.getMessage());
                 }
