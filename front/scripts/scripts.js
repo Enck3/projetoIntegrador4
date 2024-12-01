@@ -269,3 +269,35 @@ async function loadMechanicProfile(mechanicId) {
         alert('Erro ao carregar perfil do mecânico. Tente novamente mais tarde.');
     }
 }
+
+document.getElementById('cadastroAgendamento').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const nomeCliente = document.getElementById('nome').value;
+    const emailCliente = document.getElementById('emailCliente').value;
+    const emailMecanico = document.getElementById('emailMecanico').value;
+    const especialidade = document.getElementById('confirmPassword').value;
+    const servico = document.getElementById('servico').value;
+    const data = document.getElementById('data').value;
+    
+
+    
+
+    try {
+        const response = await fetch('http://localhost:3000/user/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 'nomeCliente': nomeCliente, 'emailCliente': emailCliente, 'emailMecanico': emailMecanico, 'especialidade': especialidade, 'servico': servico, 'data': data })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert("Usuário cadastrado com sucesso!");
+            window.location.href = "login.html";
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        alert("Erro ao cadastrar: " + error.message);
+    }
+});

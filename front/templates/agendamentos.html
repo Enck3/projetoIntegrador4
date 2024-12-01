@@ -14,19 +14,19 @@
     <main>
         <div class="appointment-container">
             <h2>Agendar um Serviço</h2>
-            <form>
-                <input type="text" placeholder="Nome do Cliente" required>
-                <input type="email" placeholder="E-mail do Cliente" required>
-                <input type="email" placeholder="E-mail do Mecânico" required>
-                <select required>
+            <form id="cadastroAgendamento">
+                <input type="text" placeholder="Nome do Cliente" id="nomeCliente" required>
+                <input type="email" placeholder="E-mail do Cliente" id="emailCliente" required>
+                <input type="email" placeholder="E-mail do Mecânico" id="emailMecanico" required>
+                <select id="especialidade" required>
                     <option value="">Escolher Especialidade</option>
                     <option value="motor">Motor</option>
                     <option value="freios">Freios</option>
                     <option value="suspensao">Suspensão</option>
                     <option value="eletrica">Elétrica</option>
                 </select>
-                <input type="text" placeholder="Serviço Desejado" required>
-                <input type="date" required>
+                <input type="text" placeholder="Serviço Desejado" id="servico" required>
+                <input type="date" id="data" required>
                 <button type="submit">Agendar</button>
             </form>
         </div>

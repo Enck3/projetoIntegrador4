@@ -351,8 +351,9 @@ app.get('/buscar-por-cidade', async (req, res) => {
 app.post('/cadastro-agendamento', async (req, res) => {
     try {
         const {
-            email_mecanico,
-            email_cliente,
+            nomeCliente,
+            emailCliente,
+            emailMecanico,
             especialidade,
             servico,
             data
@@ -360,18 +361,22 @@ app.post('/cadastro-agendamento', async (req, res) => {
         } = req.body;
 
         // Validação dos dados obrigatórios
-        if (!email_mecanico || !email_cliente || !especialidade || !servico || !data) {
+        if (!nomeCliente || !emailCliente || !especialidade || !servico || !data || !emailMecanico) {
             return res.status(400).json({ message: 'Campos obrigatórios estão faltando.' });
         }
 
         // Acessar a coleção de mecânicos
-        const db = client.db('projetoIntegrador4'); // Substitua pelo nome do seu banco
+        const db = client.db('projetoIntegrador4');
+        
+        const agendamentoCollection = db.collection('agendamentos');
+         // Substitua pelo nome do seu banco
         
 
         // Criar o novo mecânico
         const newAgendamento = {
-            email_mecanico,
-            email_cliente,
+            nomeCliente,
+            emailCliente,
+            emailMecanico,
             especialidade,
             servico,
             data
