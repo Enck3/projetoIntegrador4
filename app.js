@@ -348,7 +348,48 @@ app.get('/buscar-por-cidade', async (req, res) => {
     }
 });
 
+app.post('/cadastro-agendamento', async (req, res) => {
+    try {
+        const {
+            email_mecanico,
+            email_cliente,
+            especialidade,
+            servico,
+            data
+            
+        } = req.body;
 
+        // Validação dos dados obrigatórios
+        if (!email_mecanico || !email_cliente || !especialidade || !servico || !data) {
+            return res.status(400).json({ message: 'Campos obrigatórios estão faltando.' });
+        }
+
+        // Acessar a coleção de mecânicos
+        const db = client.db('projetoIntegrador4'); // Substitua pelo nome do seu banco
+        
+
+        // Criar o novo mecânico
+        const newAgendamento = {
+            email_mecanico,
+            email_cliente,
+            especialidade,
+            servico,
+            data
+        };
+
+        // Inserir o mecânico e obter o ID gerado
+        const agendamentoResult = await agendamentoCollection.insertOne(newAgendamento);
+        const agendamentoId = agendamentoResult.insertedId;
+
+        // Inserir os serviços oferecidos, se houver
+        
+
+        res.status(201).json({ message: 'Agendamento cadastrado com sucesso!', agendamentoId });
+    } catch (error) {
+        console.error('Erro ao cadastrar mecânico:', error);
+        res.status(500).json({ message: 'Erro ao cadastrar mecânico' });
+    }
+});
 
 
 
