@@ -47,7 +47,7 @@ app.post('/user/register', async (req, res) => {
         const usersCollection = db.collection('users');
 
         // Verificar se o usuário ou e-mail já existe
-        const existingUser = await usersCollection.findOne({ $or: [{ name }, { email }, { telefone }, { cidade }] });
+        const existingUser = await usersCollection.findOne({ $or: [ { email } ] });
         if (existingUser) {
             return res.status(400).json({ message: 'Nome de usuário ou e-mail já está em uso' });
         }
@@ -300,7 +300,7 @@ app.get('/buscar-por-cidade', async (req, res) => {
 
     try {
         await client.connect();
-        const database = client.db('SEU_NOME_DB');
+        const database = client.db('projetoIntegrador');
         const mecanicosCollection = database.collection('mecanicos');
 
         // Filtra os mecânicos pela cidade fornecida
@@ -319,6 +319,7 @@ app.get('/buscar-por-cidade', async (req, res) => {
         await client.close();
     }
 });
+
 
 
 
