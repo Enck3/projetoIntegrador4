@@ -14,20 +14,13 @@
     <main>
         <div class="appointment-container">
             <h2>Agendar um Serviço</h2>
-            <form id="cadastroAgendamento">
+            <form id="agendamentoCadastro">
                 <input type="text" placeholder="Nome do Cliente" id="nomeCliente" required>
                 <input type="email" placeholder="E-mail do Cliente" id="emailCliente" required>
                 <input type="email" placeholder="E-mail do Mecânico" id="emailMecanico" required>
-                <select id="especialidade" required>
-                    <option value="">Escolher Especialidade</option>
-                    <option value="motor">Motor</option>
-                    <option value="freios">Freios</option>
-                    <option value="suspensao">Suspensão</option>
-                    <option value="eletrica">Elétrica</option>
-                </select>
                 <input type="text" placeholder="Serviço Desejado" id="servico" required>
                 <input type="date" id="data" required>
-                <button type="submit">Agendar</button>
+                <button type="submit" id="submit">Agendar</button>
             </form>
         </div>
         <button onclick="history.back()" class="back-button">Voltar</button>
@@ -37,6 +30,6 @@
         <p>&copy; 2024 Mecânicos Online. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="../scripts/scripts.js"></script>
+    <script src="../scripts/scriptsAgendamento.js"></script>
 </body>
 </html>

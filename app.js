@@ -1,3 +1,4 @@
+const cors = require('cors');
 
 
 const express = require('express');
@@ -13,6 +14,7 @@ const { MongoClient } = require('mongodb');
 
 app.use(express.json());
 
+app.use(cors());
 
 const uri = 'mongodb+srv://lucaspcanhete:123456qwerty@cluster0.ypscm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -114,7 +116,7 @@ app.post('/user/login', async (req, res) => {
         }
 
         // Acessar a coleção de usuários
-        const db = client.db('projetoIntegrador'); // Substitua pelo nome do seu banco
+        const db = client.db('projetoIntegrador4'); // Substitua pelo nome do seu banco
         const usersCollection = db.collection('users');
 
         // Verificar se o usuário ou e-mail já existe
@@ -123,7 +125,7 @@ app.post('/user/login', async (req, res) => {
             return res.status(400).json({ message: 'Usuário não existente' });
         }
 
-        // Criptografar a senha antes de armazená-la
+       
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if(!isPasswordValid) {
             return res.status(400).json({ message: 'Senha incorreta.' });
@@ -354,14 +356,13 @@ app.post('/cadastro-agendamento', async (req, res) => {
             nomeCliente,
             emailCliente,
             emailMecanico,
-            especialidade,
             servico,
-            data
+            dataAgendamento
             
         } = req.body;
 
         // Validação dos dados obrigatórios
-        if (!nomeCliente || !emailCliente || !especialidade || !servico || !data || !emailMecanico) {
+        if (!nomeCliente || !emailCliente || !servico || !dataAgendamento || !emailMecanico) {
             return res.status(400).json({ message: 'Campos obrigatórios estão faltando.' });
         }
 
@@ -377,9 +378,9 @@ app.post('/cadastro-agendamento', async (req, res) => {
             nomeCliente,
             emailCliente,
             emailMecanico,
-            especialidade,
+            
             servico,
-            data
+            dataAgendamento
         };
 
         // Inserir o mecânico e obter o ID gerado
